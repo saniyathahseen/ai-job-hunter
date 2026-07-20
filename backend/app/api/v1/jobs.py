@@ -27,13 +27,3 @@ def sync_jobs(db: Session = Depends(get_db)):
         "saved": total
     }
 
-@router.post("/sync")
-def sync_jobs(
-    db: Session = Depends(get_db),
-):
-
-    
-
-    return {
-        "saved": total
-    }

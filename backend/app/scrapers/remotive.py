@@ -47,14 +47,14 @@ def fetch_remotive():
             extracted_jobs.append(
                 {
                     "company": str(job.get("company", "")).strip(),
-                    "title": str(job.get("title", "")).strip(),
+                    "position": str(job.get("title", "")).strip(),
                     "location": str(job.get("location", "Worldwide")).strip(),
                     "remote": True,
-                    "salary": str(job.get("salary", "")).strip(),
+                    "salary_min": str(job.get("salary", "")).strip(),
                     "description": description,
-                    "apply_url": str(job.get("link", "")).strip(),
+                    "url": str(job.get("link", "")).strip(),
                     "source": "Remotive",
-                    "posted_date": posted_date,
+                    "date": posted_date,
                 }
             )
 

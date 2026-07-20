@@ -75,17 +75,16 @@ def fetch_wework():
             jobs.append(
                 {
                     "company": company.strip() or "Unknown",
-                    "title": title.strip(),
+                    "position": title.strip(),
                     "location": location,
                     "remote": True,
-                    "salary": "",  # WWR RSS feeds do not expose structured minimum salary values
+                    "salary_min": "",  # WWR RSS feeds do not expose structured minimum salary values
                     "description": description,
-                    "apply_url": job_url.strip(),
+                    "url": job_url.strip(),
                     "source": "WeWorkRemotely",
-                    "posted_date": posted_date,
+                    "date": posted_date,
                 }
             )
-
         return jobs
 
     except requests.exceptions.RequestException as e:

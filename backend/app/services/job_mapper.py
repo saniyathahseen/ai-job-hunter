@@ -15,7 +15,7 @@ def map_remote_ok(job):
 
         "apply_url": job.get("url", ""),
 
-        "source": "Remote OK",
+        "source": job.get("source", "Remote OK"),
 
         "posted_date": str(job.get("date", "")),
     }
