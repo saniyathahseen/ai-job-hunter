@@ -5,8 +5,10 @@ from sqlalchemy.sql import func
 from sqlalchemy import Integer
 from sqlalchemy import String
 from sqlalchemy import Text
+from sqlalchemy import Index
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
+from sqlalchemy.orm import relationship
 
 from database.base import Base
 
@@ -28,7 +30,7 @@ class Job(Base):
 
     description: Mapped[str] = mapped_column(Text)
 
-    apply_url: Mapped[str] = mapped_column(Text)
+    apply_url: Mapped[str] = mapped_column(Text, unique=True)
 
     source: Mapped[str] = mapped_column(String(100))
 
@@ -37,4 +39,10 @@ class Job(Base):
     created_at: Mapped[datetime] = mapped_column(
     DateTime(timezone=True),
     server_default=func.now(),
-)
+    )
+
+    applications = relationship("Application", back_populates="job")
+
+    __table_args__ = (
+        Index("idx_jobs_created_at", "created_at"),
+    )

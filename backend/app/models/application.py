@@ -6,8 +6,9 @@ from sqlalchemy import Integer
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
+from sqlalchemy.orm import relationship
 
-from app.database.base import Base
+from database.base import Base
 
 
 class Application(Base):
@@ -28,3 +29,5 @@ class Application(Base):
     applied_on: Mapped[datetime] = mapped_column(
     DateTime(timezone=True),
     server_default=func.now(),)
+
+    job = relationship("Job", back_populates="applications")

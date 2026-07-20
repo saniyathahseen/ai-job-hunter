@@ -26,6 +26,3 @@ scheduler.add_job(
 
     minute=0,
 )
-# Look for where you call scheduler.start()
-if not scheduler.running:
-    scheduler.start()

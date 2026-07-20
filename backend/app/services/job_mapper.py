@@ -1,4 +1,4 @@
-def map_remote_ok(job):
+def map_job(job):
 
     return {
         "company": job.get("company", ""),

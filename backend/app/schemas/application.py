@@ -1,12 +1,18 @@
-from app.database.session import SessionLocal
+from datetime import datetime
+from pydantic import BaseModel
 
 
-def get_db():
+class ApplicationCreate(BaseModel):
+    job_id: int
+    status: str
+    notes: str | None = None
 
-    db = SessionLocal()
 
-    try:
-        yield db
+class ApplicationResponse(BaseModel):
+    id: int
+    job_id: int
+    status: str
+    notes: str | None = None
+    applied_on: datetime | None = None
 
-    finally:
-        db.close()
+    model_config = {"from_attributes": True}
