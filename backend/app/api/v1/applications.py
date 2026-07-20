@@ -1,13 +1,13 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
-from database.dependencies import get_db
-from crud.application import (
+from app.database.dependencies import get_db
+from app.crud.application import (
     get_applications,
     get_application,
     create_application,
     update_application_status,
 )
-from schemas.application import ApplicationCreate, ApplicationResponse
+from app.schemas.application import ApplicationCreate, ApplicationResponse
 
 router = APIRouter(
     prefix="/applications",

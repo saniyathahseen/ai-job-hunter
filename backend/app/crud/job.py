@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from models.job import Job
-from schemas.job import JobCreate
+from app.models.job import Job
+from app.schemas.job import JobCreate
 from sqlalchemy import select
 
 

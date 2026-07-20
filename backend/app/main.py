@@ -1,7 +1,20 @@
+import sys
+from pathlib import Path
+
+# Ensure the backend/ directory is on sys.path so that imports like
+# "from app.api.v1.jobs import ..." work regardless of how main.py is invoked.
+BACKEND_DIR = Path(__file__).resolve().parent.parent
+if str(BACKEND_DIR) not in sys.path:
+    sys.path.insert(0, str(BACKEND_DIR))
+
 from fastapi import FastAPI
-from api.v1.jobs import router as jobs_router
-from api.v1.applications import router as applications_router
-from scheduler.scheduler import scheduler
+from app.api.v1.jobs import router as jobs_router
+from app.api.v1.applications import router as applications_router
+from app.scheduler.scheduler import scheduler
+from app.core.logging import setup_logging
+
+# Configure application-wide logging first
+setup_logging()
 
 app = FastAPI(title="AI Job Hunter", version="1.0.0")
 app.include_router(jobs_router)

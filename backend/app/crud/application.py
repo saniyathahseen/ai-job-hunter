@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from models.application import Application
-from schemas.application import ApplicationCreate
+from app.models.application import Application
+from app.schemas.application import ApplicationCreate
 from sqlalchemy import select
 
 

@@ -1,4 +1,4 @@
-from models.job import Job
-from models.application import Application
+from app.models.job import Job
+from app.models.application import Application
 
 __all__ = ["Job", "Application"]

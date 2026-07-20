@@ -1,10 +1,8 @@
-from fastapi import APIRouter
-from fastapi import Depends
-from fastapi import Query
-from database.dependencies import get_db
+from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
-from crud.job import get_jobs
-from services.job_service import JobService
+from app.database.dependencies import get_db
+from app.repositories.job_repository import JobRepository
+from app.services.job_service import JobService
 
 router = APIRouter(prefix="/jobs", tags=["Jobs"])
 
@@ -15,11 +13,14 @@ def list_jobs(
     skip: int = Query(0, ge=0),
     limit: int = Query(20, ge=1, le=100),
 ):
-    return get_jobs(db, skip=skip, limit=limit)
+    """Return paginated job listings."""
+    repo = JobRepository(db)
+    return repo.get_jobs(skip=skip, limit=limit)
 
 
 @router.post("/sync")
 def sync_jobs(db: Session = Depends(get_db)):
-
-    total = JobService.sync_jobs(db)
-    return {"saved": total}
+    """Trigger a full sync from all job sources."""
+    service = JobService(db)
+    saved = service.sync_jobs()
+    return {"saved": saved}
