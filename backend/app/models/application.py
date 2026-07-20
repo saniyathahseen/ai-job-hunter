@@ -17,17 +17,15 @@ class Application(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
 
-    job_id: Mapped[int] = mapped_column(
-        ForeignKey("jobs.id")
-    )
+    job_id: Mapped[int] = mapped_column(ForeignKey("jobs.id"))
 
     status: Mapped[str] = mapped_column(String(50))
 
     notes: Mapped[str | None]
 
-    
     applied_on: Mapped[datetime] = mapped_column(
-    DateTime(timezone=True),
-    server_default=func.now(),)
+        DateTime(timezone=True),
+        server_default=func.now(),
+    )
 
     job = relationship("Job", back_populates="applications")

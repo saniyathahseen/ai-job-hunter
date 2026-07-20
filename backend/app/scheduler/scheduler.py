@@ -17,12 +17,10 @@ def scheduled_sync():
 
         db.close()
 
+
 scheduler.add_job(
     scheduled_sync,
-
     trigger="cron",
-
     hour=8,
-
     minute=0,
 )

@@ -2,11 +2,10 @@ import requests
 
 REMOTE_OK_API = "https://remoteok.com/api"
 
+
 # "https://remoteok.com/remote-python-jobs.rss"
 def fetch_remote_ok():
-    headers = {
-        "User-Agent": "AI-Job-Hunter/1.0"
-    }
+    headers = {"User-Agent": "AI-Job-Hunter/1.0"}
 
     response = requests.get(
         REMOTE_OK_API,
@@ -21,19 +20,14 @@ def fetch_remote_ok():
     # First item contains metadata
     return jobs[1:]
 
+
 SKILLS = [
     "python",
-
     "fastapi",
-
     "flask",
-
     "postgresql",
-
     "mongodb",
-
     "rest",
-
     "api",
 ]
 
@@ -44,10 +38,7 @@ def filter_python_jobs(jobs):
 
     for job in jobs:
 
-        text = (
-            f"{job.get('position','')} "
-            f"{job.get('description','')}"
-        ).lower()
+        text = (f"{job.get('position','')} " f"{job.get('description','')}").lower()
 
         if any(keyword in text for keyword in SKILLS):
             filtered.append(job)

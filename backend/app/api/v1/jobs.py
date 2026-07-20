@@ -6,10 +6,7 @@ from sqlalchemy.orm import Session
 from crud.job import get_jobs
 from services.job_service import JobService
 
-router = APIRouter(
-    prefix="/jobs",
-    tags=["Jobs"]
-)
+router = APIRouter(prefix="/jobs", tags=["Jobs"])
 
 
 @router.get("/")
@@ -25,6 +22,4 @@ def list_jobs(
 def sync_jobs(db: Session = Depends(get_db)):
 
     total = JobService.sync_jobs(db)
-    return {
-        "saved": total
-    }
+    return {"saved": total}

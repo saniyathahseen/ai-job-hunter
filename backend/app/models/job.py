@@ -37,12 +37,10 @@ class Job(Base):
     posted_date: Mapped[str] = mapped_column(String(50))
 
     created_at: Mapped[datetime] = mapped_column(
-    DateTime(timezone=True),
-    server_default=func.now(),
+        DateTime(timezone=True),
+        server_default=func.now(),
     )
 
     applications = relationship("Application", back_populates="job")
 
-    __table_args__ = (
-        Index("idx_jobs_created_at", "created_at"),
-    )
+    __table_args__ = (Index("idx_jobs_created_at", "created_at"),)

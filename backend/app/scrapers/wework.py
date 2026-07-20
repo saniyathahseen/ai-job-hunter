@@ -35,9 +35,7 @@ def fetch_wework():
 
             # 1. Parse Company & Title (WWR format: "Company: Position")
             company, _, title = (
-                raw_title.partition(":")
-                if ":" in raw_title
-                else ("", "", raw_title)
+                raw_title.partition(":") if ":" in raw_title else ("", "", raw_title)
             )
 
             # 2. Extract Location (WWR stores this in <category> tags)
@@ -64,9 +62,7 @@ def fetch_wework():
                     date_str = pub_date_element.text.strip()
                     # Strip out trailing text timezone labels if present (e.g. GMT / +0000)
                     date_clean = re.sub(r"\s+[A-Z]{3,4}$|\s+\+\d{4}$", "", date_str)
-                    parsed_date = datetime.strptime(
-                        date_clean, "%a, %d %b %Y %H:%M:%S"
-                    )
+                    parsed_date = datetime.strptime(date_clean, "%a, %d %b %Y %H:%M:%S")
                     posted_date = parsed_date.strftime("%Y-%m-%d")
                 except ValueError:
                     posted_date = pub_date_element.text.strip()

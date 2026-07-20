@@ -3,13 +3,13 @@ import re
 from datetime import datetime
 import requests
 
-REMOTIVE_API_URL = "https://remotive.com/api/remote-jobs?category=software-dev&limit=100"
+REMOTIVE_API_URL = (
+    "https://remotive.com/api/remote-jobs?category=software-dev&limit=100"
+)
 
 
 def fetch_remotive():
-    headers = {
-        "User-Agent": "AI-Job-Hunter/1.0"
-    }
+    headers = {"User-Agent": "AI-Job-Hunter/1.0"}
 
     try:
         response = requests.get(
@@ -45,7 +45,9 @@ def fetch_remotive():
                 {
                     "company": str(job.get("company_name", "")).strip(),
                     "position": str(job.get("title", "")).strip(),
-                    "location": str(job.get("candidate_required_location", "Worldwide")).strip(),
+                    "location": str(
+                        job.get("candidate_required_location", "Worldwide")
+                    ).strip(),
                     "remote": True,
                     "salary_min": str(job.get("salary", "")).strip(),
                     "description": description,

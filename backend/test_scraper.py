@@ -1,4 +1,4 @@
-from app.scrapers.remote_ok import fetch_remote_ok,filter_python_jobs
+from app.scrapers.remote_ok import fetch_remote_ok, filter_python_jobs
 
 jobs = fetch_remote_ok()
 

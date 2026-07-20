@@ -18,18 +18,10 @@ class JobService:
 
         wework_jobs = fetch_wework()
 
-        jobs = (
-            remote_ok_jobs
-            + remotive_jobs
-            + wework_jobs
-        )
-
+        jobs = remote_ok_jobs + remotive_jobs + wework_jobs
 
         jobs = filter_python_jobs(jobs)
 
-        jobs = [
-            map_job(job)
-            for job in jobs
-        ]
+        jobs = [map_job(job) for job in jobs]
 
         return save_jobs(db, jobs)
