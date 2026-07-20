@@ -25,3 +25,11 @@ pip install pytest
 pip freeze > requirements.txt
 
 uvicorn app.main:app --reload
+
+git init
+git add .
+git commit -m "Initial FastAPI project"
+
+pip install sqlalchemy psycopg2-binary alembic pydantic-settings python-dotenv
+
+alembic init alembic
