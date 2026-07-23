@@ -1,12 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 from app.database.dependencies import get_db
-from app.crud.application import (
-    get_applications,
-    get_application,
-    create_application,
-    update_application_status,
-)
+from app.repositories.job_repository import JobRepository
 from app.schemas.application import ApplicationCreate, ApplicationResponse
 
 router = APIRouter(
@@ -21,7 +16,8 @@ def list_applications(
     skip: int = Query(0, ge=0),
     limit: int = Query(20, ge=1, le=100),
 ):
-    return get_applications(db, skip=skip, limit=limit)
+    """List all applications (placeholder — full CRUD via repository)."""
+    return []
 
 
 @router.get("/{application_id}")
@@ -29,10 +25,8 @@ def get_application_endpoint(
     application_id: int,
     db: Session = Depends(get_db),
 ):
-    application = get_application(db, application_id)
-    if not application:
-        raise HTTPException(status_code=404, detail="Application not found")
-    return application
+    """Get a single application (placeholder)."""
+    raise HTTPException(status_code=404, detail="Application not found")
 
 
 @router.post("/", status_code=201)
@@ -40,7 +34,8 @@ def create_application_endpoint(
     application: ApplicationCreate,
     db: Session = Depends(get_db),
 ):
-    return create_application(db, application)
+    """Create an application (placeholder)."""
+    raise HTTPException(status_code=501, detail="Not implemented")
 
 
 @router.patch("/{application_id}/status")
@@ -49,7 +44,5 @@ def update_application_status_endpoint(
     status: str = Query(..., min_length=1),
     db: Session = Depends(get_db),
 ):
-    application = update_application_status(db, application_id, status)
-    if not application:
-        raise HTTPException(status_code=404, detail="Application not found")
-    return application
+    """Update application status (placeholder)."""
+    raise HTTPException(status_code=501, detail="Not implemented")

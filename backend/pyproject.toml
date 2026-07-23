@@ -1,0 +1,17 @@
+[tool.pylint.format]
+max-line-length = 100
+
+[tool.pylint.messages_control]
+# Disable warnings that are too noisy or not applicable
+disable = [
+    "missing-module-docstring",
+    "missing-class-docstring",
+    "missing-function-docstring",
+    "invalid-name",
+    "too-few-public-methods",
+    "too-many-arguments",
+    "line-too-long",
+    "broad-exception-caught",
+    "import-error",
+    "no-name-in-module",
+]
