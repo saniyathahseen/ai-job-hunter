@@ -39,10 +39,14 @@ class JobRepository:
     def save_jobs(self, jobs: list[dict]) -> int:
         """Bulk-save a list of job dicts, skipping duplicates. Returns count of new records."""
         added = 0
+        seen: set[str] = set()
         for job in jobs:
-            if self.job_exists(job["apply_url"]):
-                logger.debug("Duplicate skipped: %s", job["apply_url"])
+            url = job["apply_url"]
+            # Check both the database and the current batch for duplicates
+            if url in seen or self.job_exists(url):
+                logger.debug("Duplicate skipped: %s", url)
                 continue
+            seen.add(url)
             self.db.add(Job(**job))
             added += 1
         self.db.commit()
